@@ -35,6 +35,7 @@ _start:
 	mov ecx, presentar
 	mov edx, len_p
 	int 80h
+	
 
 	;*********imprimir nombre*********
 	mov eax,4
