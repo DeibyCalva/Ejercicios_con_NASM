@@ -22,6 +22,15 @@ section .text
 _start:
 
 	;********** Imprimimos en pantalla el mensaje 2*********
+
+ 	; ************* Inician los saltos*************** 
+	jmp dividir
+	;jmp restar
+	;jmp sumar
+	;jmp multiplicar
+	;jmp salir
+
+
 	mov eax, 4
 	mov ebx, 1
 	mov ecx, msj_dividendo
@@ -56,9 +65,7 @@ _start:
 	; Convertimos los valores ingresados de ascii a decimal
 	sub al, '0'
 	sub bl, '0'
- 
-	; Division. AL = AX / BL. AX = AH:AL
-	div bl
+	div bl 	; Division. AL = AX / BL. AX = AH:AL
  
 	
 	add al, '0' 	; Convertimos el resultado de la resta de decimal a ascii
