@@ -66,6 +66,7 @@ _start:
     ;*****ELIGA UNA OPCION******
     escribir msj_opcion , leng_opcion
     leer n2, 2
+    
 
     jmp dividir
 

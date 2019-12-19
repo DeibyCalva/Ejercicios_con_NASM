@@ -123,6 +123,5 @@ _start:
     escribir residuo, 1
     escribir new_line, 1
 
-    
     mov eax, 1
     int 80h

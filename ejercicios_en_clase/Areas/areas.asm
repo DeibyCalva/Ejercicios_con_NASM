@@ -44,6 +44,7 @@ section .data
     new_line db 0xa,""
 
 
+
 section .bss
     opcion resb 1
 	lado resb 1

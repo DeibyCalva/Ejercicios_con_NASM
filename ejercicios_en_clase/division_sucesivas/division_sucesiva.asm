@@ -117,7 +117,7 @@ _start:
 		mov ecx,msj_espacio
 		mov edx,len_espacio
 		int 80h
-		
+
     salir:
 	mov eax, 1
 	int 80h
