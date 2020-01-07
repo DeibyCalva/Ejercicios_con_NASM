@@ -15,8 +15,9 @@
 %endmacro
 
 section .data
-    mensaje db "Operaciones Basicas Aritmeticas", 10
-    leng equ $-mensaje
+    mensaje_opcion db 0xa,"SELECCIONE UNA OPCION: ",0xa, "1. suma",0xa, "2. Resta",0xa, "3. Multiplicacion",0xa, "4. division",0xa,"5. Salir",0ax 
+	leng_opcion equ $-mensaje_opcion
+
     msj1 db "Ingrese el primer número: "
     leng1 equ $ - msj1
 
@@ -46,6 +47,7 @@ section .data
 section .bss
     n1 resb 1
     n2 resb 1
+    opcion resb 1
 
     resultado resb 1
     residuo resb 1
@@ -53,8 +55,6 @@ section .bss
 section .text
     global _start
 _start:
-
-    escribir mensaje, leng
     ;*****INGRESO EL PRIMER NUMERO******
     escribir msj1, leng1
     leer n1, 2
@@ -64,9 +64,8 @@ _start:
     leer n2, 2
 
     ;*****ELIGA UNA OPCION******
-    escribir msj_opcion , leng_opcion
-    leer n2, 2
-    
+    escribir mensaje_opcion , leng_opcion
+    leer opcion, 2    
 
     jmp dividir
 
