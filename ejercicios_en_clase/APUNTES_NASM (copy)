@@ -1,0 +1,447 @@
+PARA EJECUTAR Y COMPILAR
+
+nasm -f elf64 hola.asm
+nasm -f elf64 -o hola.o hola.asm
+ld -o hola1 hola.o
+sudo ./hola1
+
+
+eax permite estableber operaciones aritmeticas y ope de E/S, tambien sirve como contador
+permite almacenar valores que seran impresos o leido.
+
+edx, operaciones artimeticas y division, ademas de almacenar 
+
+
+db1 <- lenguaje ensamblador 
+db2 sexto ciclo.
+
+
+LEER INTERRUPCION 80
+y registro.
+
+
+CONCEPTOS 
+Un Programa escrito en leng Ensamblador, es almacenado en texto. -> .asm
+ESTRUCTURA:
+
+	add ax,3  //add(intrucciones), ax,3(operandos
+	etiqueta-procedimiento:
+
+	mnemonico -> cualquier tipo de instrucciones
+Cada instruccion del procesador representa 1 instruccion en maquina (compilando).
+Un programa en esamblador que lee un archivo, se convierte en un.
+En esamblador son: turboassamblar, task, nasm.
+
+Registro -> 
+Direcciones pueden ser una constante inscrita, se almacenan linealmente, pero con aleatoriedad.
+--- mov ax,bx ; direcc entre Registros
+	mov ax,2 ; d. directo
+	mov [dx],3 ; d.indirecto.
+
+COMPONENTES GENERALES
+
+//Poner comentario -> COMMENT o ";
+
+Palabras RESERVADAS -> 
+	Instrucciones : add,
+	Directias: EQU ; asigna un valor entero
+	Operadores; SIZE ;Expresiones y simbolos
+	Simbolos:	@DATA ; Permite asignar segmento de dato, @DATA
+
+IDENTIFICADOR -> Nombre que se le aplica a un elemento en un programa.
+	*No hay que iniciar con numeros, Mayus, @, $, Caracteres especiales.
+
+DIRECTIVA: 
+	Es un articifio del leng. ensamblador(registros e instrucc) pero no de la CPU(Procesador)
+	Se pueden definir Constantes.
+	Se pueden definir la capacidad de almacenamiento en memoria -> b, db, dw, dq en el .data
+	resb, resq, resw
+	Permite agrupar memorias de segmentos (memorias -> 
+		segment .data
+		segment .bss 
+		segment . text
+	Definir subrutinas de otros componentes de Sw (incluir archivos) ->
+		Directiva EQU: Define un simbolo -> simbolo puede ser una constante numerica
+		Simbolo -> Identificador (leng EQU $-cadena)
+				(simbolo EQU valor) (simbolo DB valor"cadena")-> msg db "hola"
+***Cuando se define un valor con EQU no se podra modificar su contenido en el transcurso del programa
+
+DIRECTIVA DE DATOS: son usadas en los segment de datos, es para definir espacios en memoria.
+(tamaño del objeto).
+Define espacios de 				Define espacios de datos "sin valores
+datos constantes. 				iniciales"(Variables) res
+directiva db, dw, dd, DQ, DT(Ten Bytes)		directiva resb, resw, resd, RESQ, RESQT
+	Byte, word, double word, quad word, texto.
+
+L1 db 0 		Byte etiquetado con L1 con valor inicial 0
+L2 dw 1000		Palabra etiquetado con L2 con valor inicial 1000
+L3 db 11010b		Byte etiquetado con L3 con valor inicial 110110b
+L4 db 12H		Byte etiquetado con L4 con valor inicial 12H registro
+L5 db 17o		Byte etiquetado con L5 con valor inicial 17octal
+L6 dd 1AFH		Double Word etiquetado con L6 con valor inicial de registro 1AFH
+L7 resb 1		Un Byte sin valores iniciales, byte etiquetado con L7, reserva 1 espacio
+L8 db "A"		Byte etiquetado con L8 con valor inicial 65
+			
+d -> permite definir un valor inicial o no, que puede ser modificable.		
+		
+DIRECTIVA TIMES: Repetir en un determinado num # de veces un simbolo.
+	L12 TIMES 100 db 0 -> [100 Simbolo], Repite 100 veces el cero, de un byte= L12=00000.....
+	L12 resw 100 -> Reserva 100 caracteres
+	
+* " ", ' ' -> Mismo uso.
+
+DQ (dq) -> Permite definir valores con coma/punto flotante, decimales con precisión.
+	
+
+
+
+
+call printInt ->  llamada a subrutina -> mezcla con C
+
+--------------------------------------------------------
+EXAMENES ->	1 DE OPERACIONES BASICAS
+		2 OPERACIONES LOGICAS
+		3 SALTOS NO CONDICIONALES
+		4 SALTOS CONDICIONALES
+		5 CICLOS
+--------------------------------------------------------
+////////////////////////03-06-2019///////////////////////////
+SUMAS A+B
+////////////////////////////////////////////////////////////
+
+
+dword, 
+assign | Directivas 
+define 
+	 Tipo	bytes
+dword -> byte	1
+	 nibble	4bits
+	byte	8bits
+	  word	2
+	 dword	4
+	 qword	8
+	 tword	10
+-> Cambiar el ontenido de 1 constante ... dword.asm
+
+	mov[msj+11], dword '?'
+
+.assign -> %assign identificador valor -> assign.asm
+PERMITE MODIFICAR CARACTER POR CARACTER
+*Asigna un valor temporal a la variable estatica
+
+
+///////////////////////OPERANDO///////////////
+mul bx ; = ax-> ax, bx
+div bl ;  = 1 operando
+div bl ;  = ax= ax/bx
+
+
+////////////////////CONTEO///////////////////
+
+cmp -> permite verificar igualdad   -- 1=1 0=0  --> Se activa la bandera ZF (Zero Flag) !! 
+si es igual ZR (la instruccion q se ejecuto activo la bandera de ZF), si es fiderente no se activa.
+Si no, se activa NZ "no Zero"
+
+//////////////////////SATOS ////////////////
+DE TIPO CONDICIONAL  -> JMP 
+
+
+Y DE TIPO NO CONDICIONAL -> jz jg jn je jp
+
+
+
+
+/// JMP -> SE UBICA EN POSICION EN MEMORIA EN EL SEGMENTO DE CODIGO 
+/// EN WINDOWS -> DEBUG -> jmp 102
+/// UBUNTU -> NASM 
+
+el jmp -> se hace por etiquetas , de arriba a abajo
+-------------------------------
+1 suma 
+2 resta
+3 multiplicacion
+4 Division
+5 salir 
+
+----
+segment .bss
+segment ..tect
+
+_start:
+	jmp multiplicacion
+
+	sumar:
+		jmp salir	
+	-
+	restar:
+		jmp division
+	-
+	multiplicar:
+		jmp restar
+	-
+	division:
+		jmp sumar
+	-
+	salir:
+	-
+	-
+
+
+//////////////////////////////////////
+jmp altera bandera zf -> si son iguales,se activa zr
+¿Que pasa si se quiere hacer una app si son iguales o no?
+mov ax,5
+mov bx,5
+
+cmp ax,bx
+jz iguales
+jp no_iguales
+iguales:
+	;imprimir son iguales
+
+no_iguales:
+	; imprimir no son iguales
+
+		; saltos condicionales : jz, je, jg, jp, ja....
+
+
+
+////////////////////////////////  17-06-2019 //////////////////////
+cmp -> permite verificar igualdad   -- 1=1 0=0  --> Se activa la bandera ZF (Zero Flag) !! 
+---------------------------------------------
+cmp(3,3) 		
+	ZF=1 CF=0 -> la bandera del cero se activa
+mov al,3
+cmp al,3
+
+cmp(4,3) 		
+	ZF=0 CF=0 -> no hay modificacion de banderas ni carry ni flag
+mov al,4 ;cuando el operando 1 es mayor no se activa el flag
+cmp al,3
+
+
+cmp(3,4)
+	ZF=0	CF=1 la bandera del cero no activa y si del carryFlag
+mov al,3
+cmp al,4
+
+----------------------------------------------------
+
+¿Numero es impar o par?
+1.Si ambos bits son iguales = 1
+1.Si ambos bits no son iguales = 0
+;---comparacion del AND
+mov ax, 7	;0111
+and ax, 1	;0001 -> niblel -> 0000 0001 -> byte
+			 1001 -> el bit menos signif -> impar
+
+
+mov ax, 8	;1000
+and ax, 1	;0000 -> niblel -> 0000 0001 -> byte
+			 0110 -> el bit menos signif -> impar
+------------------------------------------------------------
+
+mov al, 7		;0111
+and al, 1		;0001
+				 0110
+
+
+------------
+jmp -> salta a etiquetas NO CONDICIONAL .
+--- Estados de banderas ------------------------------------
+	jc – Salta si el flag de acarreo está establecido a CF=1
+Saltar si CF está prendida --- Objetivo: Saltar si hay acarreo
+------------------------------------------------------------
+	jg - Salta si es mayor (Con signo)	- ZF=0 y SF=OF
+	Salta si ZF es cero o si OF y SF son iguales.
+---------------------------------------------------
+	jz - Salta si es cero a ZF=1
+	JZ: Salta si está prendido el bit Zero del registro de banderas.
+Objetivo: Saltar si la última comparación realizada da igual.
+-------------------------------------------------
+	jmp - Salta	- Siempre salta
+
+-------------------------------------------------
+//////////////// 20-06-2019  
+PILAS
+push -> apilar
+pop -> desapilar
+
+mov eax, 3
+push eax -> solo guarda el valor 3  ||| pop cl 3
+
+
+----------REPASO---------------
+usr/include/asm/unistd_32.h
+
+‘cmp’ compara los dos operandos y establece una serie de flags como resultado de la operación realizada. 
+
+CMP <Operador 1>, <Operador 2>
+
+El operador 1, se compara con el 2.
+
+Los operandos pueden ser cualquier direccionamiento válido, cumpliendo las reglas de la instrucción MOV con respecto a los operandos.
+Ésta instrucción compara 2 operandos y luego cambia el registro de banderas en base al resultado de la comparación.
+--------------------------------
+AND
+Es un 'y' lógico. Se realiza entre dos cifras binarias confrontando cada cifra con su correspondiente, y el resultado será "1" si las dos son verdaderas (si las dos valen "1"), y "0" (falso) en el resto de los
+casos.
+
+
+Instrucción			Condición
+JA	Jump if Above	salta si por encima	A>B (sin signo)
+JB	Jump if Below	salta si por debajo	A<B (sin signo)
+JE	Jump if Equal	salta si igual	A=B
+JG	Jump if Greater	salta si mayor	A>B (con signo)
+JL	Jump if Less	salta si menor	A<B (con signo)
+
+JZ salta solo si ZF es uno
+JNZ salta solo si ZF es cero
+JO salta solo si OF es uno
+JNO salta solo si OF es cero
+JS salta solo si SF es uno
+JNS salta solo si SF es cero
+JC salta solo si CF es uno
+JNC salta solo si CF es cero
+JP salta solo si PF es uno
+JNP salta solo si PF es cero
+///////////////////////////27-06-19////////////////
+Call -> llama subrutinas 
+	-> api -> metodos
+call = jmp 
+Cuando usamos el call, lo traemos y lo retornamos con "ret"
+a la siguiente linea del call
+
+loop : ciclo
+	llama a etiqueta
+	afecta al registro contador Cx
+		-> decremento de cx -> dec cx hasta llega a cx=0
+mov cx, 9
+imprimir:
+	dec cx
+loop imprimir	; loop = cx=0
+
+
+
+-----------------
+push
+10
+1
+
+pop
+1
+
+////////////////////// 08-07-2019  ///////// 
+PILA -> SEGMENTO DE PILA | Requiere pila
+Nasm -> no se necesita definir un segmento de pila, se define solo
+Tasm -> .stack -> segment .stack
+
+*Tener una memoria temporal con el objetivo de almacenar datos, direcciones y subrutinas
+
+SS -> stack Segment 
+SP -> Define el tamaño de la pila
+SP-> desplazamiento (indirecto)
+
+SP -> Se va a correr a la izq (SP-2)  *PUSH(SP-2)
+mov[sp],3 -> vamos al ultimo valor de la pila
+mov[sp+2],3 -> + es push = le cambia el valor en esa posicion
+------------------------------------
+mov ax,3
+push ax
+| | | | | | | | | | <- sp 50
+ss
+Sp: resta 2 bytes(50-2=48) redefine el tam de la pila
+| | | | | | | | |3| <- sp 48
+mov cx,9
+push cx
+Sp: resta 2 bytues(48-2=46)
+| | | | | | | |9|3| <- sp 46
+ss
+mov bx,5
+push bx	; resta sp en 2(46-2=44)
+| | | | | | |5|9|3| <- sp 44
+
+pop cx: devuelve el valor de pila que apunta SP(en ese momento)
+al registro cx,
+suma a sp 2bytes sp=46
+| | | | | | |5|9|3| <- sp 46
+
+pop ax ; devuelve el valor de la pila que apunta (en ese momento)
+ax=9
+suma 2bytes a sp
+46+2=48
+| | | | | | |5|9|3| <- sp 48
+
+-------------------------------------------
+psha -> pila con registros del procesador(podemos tener EAX, EBX, ECX, EDX, EDI(indice destino), ESI, EBP
+
+Guarda y restaura los registros de proposito general
+pusha, popa
+Guardan y resstablecen las banderas del procesador "Reinician"
+Pushf, popf
+
+---------------ARREGLOS----------------
+SI Y DI -> Fuente y destino
+
+1 segment .data
+2 ; define un arreglo de 10 plabras dobles con valores
+3 ; iniciales de 1,2,..,10
+4 a1 dd 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+5 ; define un arreglo de 10 palabras inicadas todas con 0
+6 a2 dw 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+7 ; lo mismo de antes usando TIMES
+8 a3 times 10 dw 0
+9 ; define un arreglo de bytes con 200 ceros y luego 100 con unos
+10 a4 times 200 db 0
+11 times 100 db 1
+12
+13 segment .bss
+14 ; define un arreglo de 10 palabras dobles sin valor inicial
+15 a5 resd 10
+16 ; define un arreglo de 100 p
+
+////////////////// SUMA ELEMENTOS ARREGLO //////////////
+1 mov ebx, array1 ; ebx = direcci´on de array1
+2 mov dx, 0 ; dx almacenar´a sum
+3 mov ecx, 5
+4 lp:
+5 add dl, [ebx] ; dl += *ebx
+6 jnc next ; if no hay carry vaya a next
+7 inc dh ; inc dh
+8 next:
+9 inc ebx ; bx++
+10 loop lp
+////////////////// 22-07-2019 ////////////////
+MACROS PARA USAR EN EL CODIGO
+
+/////////////////////////////////
+LECTURA DE ARCHIVOS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
