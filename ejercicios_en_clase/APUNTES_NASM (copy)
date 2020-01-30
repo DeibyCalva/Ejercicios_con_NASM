@@ -105,7 +105,7 @@ EXAMENES ->	1 DE OPERACIONES BASICAS
 		4 SALTOS CONDICIONALES
 		5 CICLOS
 --------------------------------------------------------
-////////////////////////03-06-2019///////////////////////////
+////////////////////////         ///////////////////////////
 SUMAS A+B
 ////////////////////////////////////////////////////////////
 
@@ -206,7 +206,7 @@ no_iguales:
 
 
 
-////////////////////////////////  17-06-2019 //////////////////////
+////////////////////////////////  2020 //////////////////////
 cmp -> permite verificar igualdad   -- 1=1 0=0  --> Se activa la bandera ZF (Zero Flag) !! 
 ---------------------------------------------
 cmp(3,3) 		
@@ -262,7 +262,7 @@ Objetivo: Saltar si la última comparación realizada da igual.
 	jmp - Salta	- Siempre salta
 
 -------------------------------------------------
-//////////////// 20-06-2019  
+//////////////// 20-01-2020
 PILAS
 push -> apilar
 pop -> desapilar
@@ -305,17 +305,25 @@ JC salta solo si CF es uno
 JNC salta solo si CF es cero
 JP salta solo si PF es uno
 JNP salta solo si PF es cero
-///////////////////////////27-06-19////////////////
-Call -> llama subrutinas 
+
+///////////////////////////  call    ////////////////
+ es una instruccion 
+Call -> 
+	->hace saltos a diferentes segmentos
+	->llama subrutinas(hablamos de una operacion especifica) 
 	-> api -> metodos
+	-> permite hacer saltos largos 
 call = jmp 
 Cuando usamos el call, lo traemos y lo retornamos con "ret"
 a la siguiente linea del call
 
+/////////////////////////// loop ////////////////
+
 loop : ciclo
 	llama a etiqueta
 	afecta al registro contador Cx
-		-> decremento de cx -> dec cx hasta llega a cx=0
+		-> decremento de cx -> dec cx hasta llega a cx=0 
+	Salta en la misma seccion, es decir es de saltos corto	
 mov cx, 9
 imprimir:
 	dec cx
@@ -331,14 +339,14 @@ push
 pop
 1
 
-////////////////////// 08-07-2019  ///////// 
+////////////////////// 20-01-2020  ///////// 
 PILA -> SEGMENTO DE PILA | Requiere pila
 Nasm -> no se necesita definir un segmento de pila, se define solo
 Tasm -> .stack -> segment .stack
 
 *Tener una memoria temporal con el objetivo de almacenar datos, direcciones y subrutinas
 
-SS -> stack Segment 
+SS -> stack Segment establece el inicio de pila 
 SP -> Define el tamaño de la pila
 SP-> desplazamiento (indirecto)
 
