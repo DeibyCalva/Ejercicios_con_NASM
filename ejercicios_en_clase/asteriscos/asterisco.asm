@@ -54,6 +54,7 @@ filas:
 	jmp filas	
 
 colum:
+
 	dec ebx			
 	push ebx
     escribir new_line, 1
