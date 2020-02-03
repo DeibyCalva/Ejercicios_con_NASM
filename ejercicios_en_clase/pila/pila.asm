@@ -27,7 +27,7 @@ principal:
     jmp imprimir
 
 imprimir:
-    ;escribir msj, leng
+ 
     dec ecx;
     push ecx
     escribir msj, 2
