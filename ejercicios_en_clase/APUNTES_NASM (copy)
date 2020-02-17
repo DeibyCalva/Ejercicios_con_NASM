@@ -389,7 +389,9 @@ Guardan y resstablecen las banderas del procesador "Reinician"
 Pushf, popf
 
 ---------------ARREGLOS----------------
+conjunto de caracteres {}
 SI Y DI -> Fuente y destino
+;
 
 1 segment .data
 2 ; define un arreglo de 10 plabras dobles con valores
