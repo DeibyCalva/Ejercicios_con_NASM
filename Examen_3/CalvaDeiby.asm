@@ -1,10 +1,8 @@
-;Examen sobre Oilas
+;Examen sobre pilas
 ; Nombre: Deiby Patricio Calva
 ;Fecha: 03-02-2020
 
-
-
-%macro escribir 2
+%macro imprimir 2
     mov eax, 4
     mov ebx, 1
     mov ecx, %1
@@ -21,90 +19,147 @@
 %endmacro
 
 section .data
-    msj db "INGRESE PRIMER NUMERO:  "
-    leng equ $ -msj
+    msj db "ORDENAR NUMEROS",10
+    len_msj equ $-msj
 
-    msj_4 db "INGRESE SEGUNDO NUMERO:  "
-    leng_4 equ $ -msj_4
+    msj_ingreso db "Ingrese un numero: "
+    len_msj_ingreso equ $-msj_ingreso
 
-    msj_5 db "INGRESE TERCER NUMERO:  "
-    leng_5 equ $ -msj_5
+    msj_mayor db "El mayor es: "
+    len_msj_mayor equ $-msj_mayor
 
-    msj_6 db "INGRESE CUARTO NUMERO:  "
-    leng_6 equ $ -msj_6
+    msj_menor db "El menor es: "
+    len_msj_menor equ $-msj_menor
 
-    msj_7 db "INGRESE QUINTO NUMERO:  "
-    leng_7 equ $ -msj_7
-
-    msj_incre db "Ordenado menor a mayor: "
-    leng_2 equ $ -msj_incre
-
-    msj_drece db " Ordenado mayor a menor: "
-    leng_3 equ $ -msj_drece
-
-    new_line db "",10
+    salto db " ",10
+    len_salto equ $-salto
 
 section .bss
-    numero resb 2
-    numero2 resb 2
-    numero3 resb 2
-    numero4 resb 2
-    numero5 resb 2
-    resultado resb 2
-    inCr resb 2
+    num_1 resb 1
+    num_2 resb 1
+    num_3 resb 1
+    num_4 resb 1
+    num_5 resb 1
+
+    mayor resb 1
+    menor resb 1
+
+    aux resb 1
 
 section .text
     global _start
 
 _start:
-    escribir msj, leng
-    leer numero, 2
+    imprimir msj, len_msj
 
-    escribir msj_4,leng_2
-    leer numero2, 2
+    imprimir msj_ingreso, len_msj_ingreso
+    leer num_1, 2
 
-    escribir msj_5,leng_5
-    leer numero3, 2
+    imprimir msj_ingreso, len_msj_ingreso
+    leer num_2, 2
 
-    escribir msj_6,leng_6
-    leer numero4, 2
+    imprimir msj_ingreso, len_msj_ingreso
+    leer num_3, 2
 
-    escribir msj_7,leng_7
-    leer numero5, 2
+    imprimir msj_ingreso, len_msj_ingreso
+    leer num_4, 2
 
+    imprimir msj_ingreso, len_msj_ingreso
+    leer num_5, 2
 
+    mov edx, 0 ; contador 1
 
-    mov bl, -1
+llenar_pila:
+    mov ecx, edx ; contador 2
 
-procedimiento:
-    inc bl
-    mov al, [numero]
-    sub al, "0"
+    mov ebx, [num_1]
+    add ebx, '0'
     push ebx
 
-    sub al, bl 
+    mov ebx, [num_2]
+    add ebx, '0'
+    push ebx
 
-    mov cl,10
-    div cl
+    mov ebx, [num_3]
+    add ebx, '0'
+    push ebx
 
-    add ax,"00"
-    mov [resultado], ax
-    mov ax, bx
-    div cl
-    add ax,'00'
-    mov [inCr], ax
+    mov ebx, [num_4]
+    add ebx, '0'
+    push ebx
 
-    ;escribir numero, 1
-    escribir msj_incre, leng_2
-    escribir inCr,2
-    escribir msj_drece, leng_3
-    escribir resultado,2
-    escribir new_line,1
+    mov ebx, [num_5]
+    add ebx, '0'
+    push ebx
+
+    jmp proceso
+
+proceso:
+    cmp edx, 5
+    je imprimir_numeros
+
+    cmp ecx, 0
+    jg vaciar_pila
+
+    inc edx
+    
+    mov ecx, 5
+    sub ecx, edx
+
     pop ebx
-    cmp bl, 5
-    je salir
-    jmp procedimiento
+    mov [aux], ebx
 
-salir:
+    jmp comparar
+
+comparar:
+    cmp ecx, 0
+    je empujar_valor
+
+    dec ecx
+
+    mov eax, [aux]
+    pop ebx
+
+    cmp eax, ebx
+    jg comparar
+
+    mov [aux], ebx
+    jmp comparar
+
+empujar_valor:
+    mov eax, [aux]
+    push eax
+    jmp llenar_pila
+
+vaciar_pila:
+    cmp ecx, 0
+    je proceso
+
+    pop ebx
+    dec ecx
+
+    jmp vaciar_pila
+
+imprimir_numeros:
+    pop ebx
+    sub ebx, '0'
+    mov [aux], ebx
+
+    push edx
+
+    imprimir aux, 1
+    imprimir salto, len_salto
+
+    pop edx
+    dec edx 
+
+    cmp edx, 0
+    jg imprimir_numeros
+    jmp salida
+
+
+salida:
     mov eax, 1
     int 80h
+
+    
