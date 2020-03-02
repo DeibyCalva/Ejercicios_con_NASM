@@ -427,7 +427,7 @@ MACROS PARA USAR EN EL CODIGO
 /////////////////////////////////
 LECTURA DE ARCHIVOS
 
-
+para dar permisos:   chmod 777 -R nombre del archivo
 
 
 
