@@ -7,6 +7,7 @@
 %endmacro
 
 section .data
+    
     	archivo db "/home/calvita/Escritorio/ENSAMBLADOR/codigo.txt", 0
         mensaje_error db "error en el archivo",10
         len_error equ $ -mensaje_error

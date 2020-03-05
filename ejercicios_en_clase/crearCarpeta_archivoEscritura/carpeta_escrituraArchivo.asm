@@ -7,12 +7,10 @@
 %endmacro
 
 section .data
-
-
-    	archivo db "/home/calvita/Escritorio/ENSAMBLADOR/notas_examenes.txt", 0
+     path db "/home/calvita/Escritorio/ENSAMBLADOR/Nuevo", 0
+    	archivo db "/home/calvita/Escritorio/ENSAMBLADOR/Nuevo/codigo.txt", 0
         mensaje_error db "error en el archivo",10
         len_error equ $ -mensaje_error
-
 section .bss
     texto resb 35
     idarchivo resb 1
@@ -22,7 +20,12 @@ section .text
 
 _start:
 
-    mov eax, 3
+     mov eax, 39
+    mov ebx, path
+    mov ecx, 0x1FF
+    int 80h 
+
+     mov eax, 3
     mov ebx, 2
     mov ecx, texto
     mov edx, 35
@@ -50,4 +53,3 @@ error:
 salir:
     mov eax, 1
     int 80h
-
