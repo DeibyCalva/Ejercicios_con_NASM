@@ -1,7 +1,7 @@
 ;leer un arreglo de 9 numeros y q me de como resultado el numero que se repita y despues que se guarde en memoria
 %macro escribir 2
 	mov eax,4
-	mov ebx,1
+	mov ebx,1s
 	mov ecx,%1
 	mov edx,%2
 	int 80h
